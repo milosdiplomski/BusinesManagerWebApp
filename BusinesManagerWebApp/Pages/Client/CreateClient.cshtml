@@ -1,0 +1,52 @@
+﻿@page
+@model BusinesManagerWebApp.Pages.Client.CreateClientModel
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Manage Clients</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Clients.Name" class="control-label"></label>
+        <input asp-for="Clients.Name" class="form-control" />
+        <span asp-validation-for="Clients.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.Address" class="control-label"></label>
+        <input asp-for="Clients.Address" class="form-control" />
+        <span asp-validation-for="Clients.Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.City" class="control-label"></label>
+        <input asp-for="Clients.City" class="form-control" />
+        <span asp-validation-for="Clients.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.PostalCode" class="control-label"></label>
+        <input asp-for="Clients.PostalCode" class="form-control" />
+        <span asp-validation-for="Clients.PostalCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.PhoneNumber" class="control-label"></label>
+        <input asp-for="Clients.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Clients.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.Email" class="control-label"></label>
+        <input asp-for="Clients.Email" class="form-control" />
+        <span asp-validation-for="Clients.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.PIB" class="control-label"></label>
+        <input asp-for="Clients.PIB" class="form-control" />
+        <span asp-validation-for="Clients.PIB" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clients.Note" class="control-label"></label>
+        <textarea asp-for="Clients.Note" class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"></textarea>
+        <span asp-validation-for="Clients.Note" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

@@ -1,0 +1,24 @@
+﻿@page
+@model BusinesManagerWebApp.Pages.Client.IndexModel
+@{
+    ViewData["Title"] = "Admin Index";
+}
+<h1>Product Administration</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<span id="spanError" class="text-danger"></span>
+<br />
+
+<a asp-page="./CreateClient">Add Client</a>

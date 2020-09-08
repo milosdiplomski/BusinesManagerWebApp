@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinesManagerWebApp", "BusinesManagerWebApp\BusinesManagerWebApp.csproj", "{29D2708B-70DD-4E57-B0C6-7178E80B33ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinesManagerWebApp", "BusinesManagerWebApp\BusinesManagerWebApp.csproj", "{29D2708B-70DD-4E57-B0C6-7178E80B33ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
