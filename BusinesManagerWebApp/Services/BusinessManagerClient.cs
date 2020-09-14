@@ -1,4 +1,5 @@
-﻿using BusinesManagerWebApp.Services.Abstractions;
+﻿using BusinesManagerWebApp.Models;
+using BusinesManagerWebApp.Services.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
@@ -34,6 +35,46 @@ namespace BusinesManagerWebApp.Services
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json-patch+json");
 
             _client = httpClient;
+        }
+
+        /// <summary>
+        /// Generic method for HttpClient DeleteAsync
+        /// </summary>
+        /// <typeparam name="T">Return type</typeparam>
+        /// <param name="url">Url string</param>
+        /// <returns>No content</returns>
+        /// <exception cref="ApiException">The request did not return a success http response code.</exception>
+        public async Task DeleteAsync<T>(string url)
+        {
+            url = string.Concat(_apiUrl, url);
+            T result = default(T);
+
+            try
+            {
+                //Logger.Info(nameof(NetConnectorClient), $"GetAsync() client url {_client.BaseAddress}{url} return type {result}");
+
+                using (HttpResponseMessage response = await _client.DeleteAsync(url))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = await response.Content.ReadAsAsync<T>();
+                    }
+                    else
+                    {
+                        throw await CreateApiException(response);
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                //Logger.Error(nameof(NetConnectorClient), $"GetAsync HttpRequestException {ex.Message}", ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // Logger.Error(nameof(NetConnectorClient), $"GetAsync Exception {ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -77,6 +118,88 @@ namespace BusinesManagerWebApp.Services
 
             //// Return the Response
             return result;
+        }
+
+        /// <summary>
+        /// Generic method for HttpClient PostAsync
+        /// </summary>
+        /// <typeparam name="T">Return type</typeparam>
+        /// <param name="url">Url string</param>
+        /// <returns>Type provided</returns>
+        /// <exception cref="ApiException">The request did not return a success http response code.</exception>
+        public async Task PostAsync<T>(string url, T client)
+        {
+            url = string.Concat(_apiUrl, url);
+            T result = default(T);
+
+            try
+            {
+                //Logger.Info(nameof(NetConnectorClient), $"GetAsync() client url {_client.BaseAddress}{url} return type {result}");
+
+                using (HttpResponseMessage response = await _client.PostAsJsonAsync<T>(url, client))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = await response.Content.ReadAsAsync<T>();
+                    }
+                    else
+                    {
+                        throw await CreateApiException(response);
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                //Logger.Error(nameof(NetConnectorClient), $"GetAsync HttpRequestException {ex.Message}", ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // Logger.Error(nameof(NetConnectorClient), $"GetAsync Exception {ex.Message}", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Generic method for HttpClient PutAsync
+        /// </summary>
+        /// <typeparam name="T">Return type</typeparam>
+        /// <param name="url">Url string</param>
+        /// <returns>Type provided</returns>
+        /// <exception cref="ApiException">The request did not return a success http response code.</exception>
+        public async Task PutAsync<T>(string url, T client)
+        {
+            url = string.Concat(_apiUrl, url);
+            T result = default(T);
+
+            try
+            {
+                //Logger.Info(nameof(NetConnectorClient), $"GetAsync() client url {_client.BaseAddress}{url} return type {result}");
+
+                using (HttpResponseMessage response = await _client.PutAsJsonAsync<T>(url, client))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = await response.Content.ReadAsAsync<T>();
+                    }
+                    else
+                    {
+                        throw await CreateApiException(response);
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                //Logger.Error(nameof(NetConnectorClient), $"GetAsync HttpRequestException {ex.Message}", ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // Logger.Error(nameof(NetConnectorClient), $"GetAsync Exception {ex.Message}", ex);
+                throw;
+            }
+
+            //// Return the Response
         }
 
         /// <summary>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinesManagerWebApp.Extensions;
 using BusinesManagerWebApp.Models;
 using BusinesManagerWebApp.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +12,15 @@ namespace BusinesManagerWebApp.Pages.Client
 {
     public class IndexModel : PageModel
     {
-        public IClientsClient _clientsClient;
+        public IClientsClient _clientService;
 
+        public string AntiforgeryToken => HttpContext.GetAntiforgeryTokenForJs();
         [BindProperty]
         public IList<Clients> Clients { get; set; }
 
         public IndexModel(IClientsClient clientsClient)
         {
-            _clientsClient = clientsClient;
+            _clientService = clientsClient;
         }
         
         public async Task OnGet()
@@ -28,15 +30,33 @@ namespace BusinesManagerWebApp.Pages.Client
 
                 //Logger.Debug(this, $"GetContainerTypes() parentId = {parentId}");
 
-                var clients = _clientsClient.GetAllClients().Result;
+                Clients = _clientService.GetAllClients().Result;
 
-                //return clients;
             }
             catch (Exception ex)
             {
                 //Logger.Error(this, $"GetContainerTypes() Error={ex.Message}", ex);
                 //ErrorMessage = "Error getting Container Types for the selected Container";
                 throw;
+            }
+        }
+
+        public async Task<IActionResult> OnDelete(Guid id)
+        {
+            try
+            {
+
+                //Logger.Debug(this, $"GetContainerTypes() parentId = {parentId}");
+
+                await _clientService.DeleteClient(id);
+                return new NoContentResult();
+
+            }
+            catch (Exception ex)
+            {
+                //Logger.Error(this, $"GetContainerTypes() Error={ex.Message}", ex);
+                //ErrorMessage = "Error getting Container Types for the selected Container";
+                return new StatusCodeResult(500);
             }
         }
     }

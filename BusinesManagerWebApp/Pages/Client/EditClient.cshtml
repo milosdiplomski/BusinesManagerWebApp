@@ -1,11 +1,13 @@
-﻿@page
-@model BusinesManagerWebApp.Pages.Client.CreateClientModel
+﻿@page  "{id:Guid}"
+@model BusinesManagerWebApp.Pages.Client.EditClientModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
-<h1>Manage Client</h1>
+
+<h1>Edit Client</h1>
 
 <form method="post">
+    <input asp-for="Client.Id" type="hidden" />
     <div class="form-group">
         <label asp-for="Client.Name" class="control-label"></label>
         <input asp-for="Client.Name" class="form-control" />
@@ -47,6 +49,6 @@
         <span asp-validation-for="Client.Note" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Save" class="btn btn-primary" />
     </div>
 </form>

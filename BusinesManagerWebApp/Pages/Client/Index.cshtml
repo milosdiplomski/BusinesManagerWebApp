@@ -1,24 +1,54 @@
-﻿@page
+﻿@page "{id:Guid?}"
 @model BusinesManagerWebApp.Pages.Client.IndexModel
 @{
     ViewData["Title"] = "Admin Index";
 }
-<h1>Product Administration</h1>
+<h1>Client Administration</h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">PostalCode</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Email</th>
+            <th scope="col">PIB</th>
+            <th scope="col">Note</th>
             <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <td>@client.Name</td>
+                <td>@client.Address</td>
+                <td>@client.City</td>
+                <td>@client.PostalCode</td>
+                <td>@client.PhoneNumber</td>
+                <td>@client.Email</td>
+                <td>@client.PIB</td>
+                <td>@client.Note</td>
+                <td>
+                    <a asp-page="./EditClient" asp-route-id="@client.Id" class="btn btn-success">Edit</a> |
+                    <a href="#" onclick="deleteProduct('@client.Id', antiForgeryToken())" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
 <span id="spanError" class="text-danger"></span>
 <br />
 
-<a asp-page="./CreateClient">Add Client</a>
+<a asp-page="./CreateClient" class="btn btn-success">Add Client</a>
+
+@section Scripts
+{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script language="javascript">
+        const antiForgeryToken = () => '@Model.AntiforgeryToken';
+    </script>
+}

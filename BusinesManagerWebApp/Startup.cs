@@ -40,6 +40,8 @@ namespace BusinesManagerWebApp
 
             // configuration options
             services.Configure<BusinessManagerClientOptions>(Configuration.GetSection("BusinessManagerApi"));
+
+            services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
