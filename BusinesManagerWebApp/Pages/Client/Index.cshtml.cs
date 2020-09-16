@@ -15,6 +15,7 @@ namespace BusinesManagerWebApp.Pages.Client
         public IClientsClient _clientService;
 
         public string AntiforgeryToken => HttpContext.GetAntiforgeryTokenForJs();
+
         [BindProperty]
         public IList<Clients> Clients { get; set; }
 

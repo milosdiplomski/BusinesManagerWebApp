@@ -37,6 +37,7 @@ namespace BusinesManagerWebApp
             services.AddHttpClient();
             services.AddHttpClient<IBusinessManagerClient, BusinessManagerClient>();
             services.AddScoped<IClientsClient, ClientsClient>();
+            services.AddScoped<IProductsService, ProductsService>();
 
             // configuration options
             services.Configure<BusinessManagerClientOptions>(Configuration.GetSection("BusinessManagerApi"));

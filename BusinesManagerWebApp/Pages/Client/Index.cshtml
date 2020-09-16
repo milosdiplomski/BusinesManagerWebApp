@@ -33,7 +33,7 @@
                 <td>@client.Note</td>
                 <td>
                     <a asp-page="./EditClient" asp-route-id="@client.Id" class="btn btn-success">Edit</a> |
-                    <a href="#" onclick="deleteProduct('@client.Id', antiForgeryToken())" class="btn btn-danger">Delete</a>
+                    <a href="#" onclick="deleteClient('@client.Id', antiForgeryToken())" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

@@ -1,4 +1,58 @@
-﻿@page
+﻿@page "{id:Guid?}"
 @model BusinesManagerWebApp.Pages.Products.IndexModel
 @{
+    ViewData["Title"] = "Admin Index";
+}
+<h1>Product Administration</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Barcode</th>
+            <th scope="col">SerialNumber</th>
+            <th scope="col">Purchase Price</th>
+            <th scope="col">Sale Price</th>
+            <th scope="col">Waranty</th>
+            <th scope="col">Waranty exp date</th>
+            <th scope="col">Purchase date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Others</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+        <tr>
+            <td>@product.Category</td>
+            <td>@product.Barcode</td>
+            <td>@product.SerialNumber</td>
+            <td>@product.PurchasePrice</td>
+            <td>@product.SalePrice</td>
+            <td><input type="checkbox" disabled checked="@product.Warranty"></td>
+            <td>@product.WarrantyExpirationDate.ToString("yyyy/MM/dd")</td>
+            <td>@product.PurchaseDate.ToString("yyyy/MM/dd")</td>
+            <td>@product.Quantity</td>
+            <td>@product.Others</td>
+            <td>
+                <a asp-page="./EditProduct" asp-route-id="@product.Id" class="btn btn-success">Edit</a> |
+                <a href="#" onclick="deleteProduct('@product.Id', antiForgeryToken())" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<span id="spanError" class="text-danger"></span>
+<br />
+
+<a asp-page="./CreateProduct" class="btn btn-success">Add Product</a>
+
+@section Scripts
+{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script language="javascript">
+        const antiForgeryToken = () => '@Model.AntiforgeryToken';
+    </script>
 }
