@@ -8,6 +8,7 @@ using BusinesManagerWebApp.Services.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,9 @@ namespace BusinesManagerWebApp
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentity<User, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -38,6 +42,7 @@ namespace BusinesManagerWebApp
             services.AddHttpClient<IBusinessManagerClient, BusinessManagerClient>();
             services.AddScoped<IClientsClient, ClientsClient>();
             services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<IProviderService, ProviderService>();
 
             // configuration options
             services.Configure<BusinessManagerClientOptions>(Configuration.GetSection("BusinessManagerApi"));

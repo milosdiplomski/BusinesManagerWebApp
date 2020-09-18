@@ -37,7 +37,7 @@
             <td>@product.Others</td>
             <td>
                 <a asp-page="./EditProduct" asp-route-id="@product.Id" class="btn btn-success">Edit</a> |
-                <a href="#" onclick="deleteProduct('@product.Id', antiForgeryToken())" class="btn btn-danger">Delete</a>
+                <a href="#" onclick="deleteFunc('@product.Id', antiForgeryToken(), 'Products')" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         }

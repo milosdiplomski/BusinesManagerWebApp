@@ -1,4 +1,54 @@
-﻿@page
+﻿@page "{id:Guid}"
 @model BusinesManagerWebApp.Pages.Provider.EditProviderModel
 @{
+    ViewData["Title"] = "Edit";
 }
+
+<h1>Edit Provider</h1>
+
+<form method="post">
+    <input asp-for="Provider.Id" type="hidden" />
+    <div class="form-group">
+        <label asp-for="Provider.Name" class="control-label"></label>
+        <input asp-for="Provider.Name" class="form-control" />
+        <span asp-validation-for="Provider.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.Address" class="control-label"></label>
+        <input asp-for="Provider.Address" class="form-control" />
+        <span asp-validation-for="Provider.Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.City" class="control-label"></label>
+        <input asp-for="Provider.City" class="form-control" />
+        <span asp-validation-for="Provider.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.PostalCode" class="control-label"></label>
+        <input asp-for="Provider.PostalCode" class="form-control" />
+        <span asp-validation-for="Provider.PostalCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.PhoneNumber" class="control-label"></label>
+        <input asp-for="Provider.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Provider.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.Email" class="control-label"></label>
+        <input asp-for="Provider.Email" class="form-control" />
+        <span asp-validation-for="Provider.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.PIB" class="control-label"></label>
+        <input asp-for="Provider.PIB" class="form-control" />
+        <span asp-validation-for="Provider.PIB" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Provider.Note" class="control-label"></label>
+        <textarea asp-for="Provider.Note" class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"></textarea>
+        <span asp-validation-for="Provider.Note" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

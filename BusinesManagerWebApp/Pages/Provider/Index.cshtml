@@ -1,4 +1,55 @@
-﻿@page
+﻿@page "{id:Guid?}"
 @model BusinesManagerWebApp.Pages.Provider.IndexModel
 @{
+    ViewData["Title"] = "Admin Index";
+}
+
+<h1>Provider Administration</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">PostalCode</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Email</th>
+            <th scope="col">PIB</th>
+            <th scope="col">Note</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var provider in Model.Provider)
+        {
+            <tr>
+                <td>@provider.Name</td>
+                <td>@provider.Address</td>
+                <td>@provider.City</td>
+                <td>@provider.PostalCode</td>
+                <td>@provider.PhoneNumber</td>
+                <td>@provider.Email</td>
+                <td>@provider.PIB</td>
+                <td>@provider.Note</td>
+                <td>
+                    <a asp-page="./EditProvider" asp-route-id="@provider.Id" class="btn btn-success">Edit</a> |
+                    <a href="#" onclick="deleteFunc('@provider.Id', antiForgeryToken(), 'Provider')" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<span id="spanError" class="text-danger"></span>
+<br />
+
+<a asp-page="./CreateProvider" class="btn btn-success">Add Provider</a>
+
+@section Scripts
+{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script language="javascript">
+        const antiForgeryToken = () => '@Model.AntiforgeryToken';
+    </script>
 }
