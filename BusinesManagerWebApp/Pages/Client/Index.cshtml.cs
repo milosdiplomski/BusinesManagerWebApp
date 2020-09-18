@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using BusinesManagerWebApp.Extensions;
 using BusinesManagerWebApp.Models;
 using BusinesManagerWebApp.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BusinesManagerWebApp.Pages.Client
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         public IClientsClient _clientService;

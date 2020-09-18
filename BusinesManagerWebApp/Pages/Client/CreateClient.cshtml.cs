@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinesManagerWebApp.Models;
 using BusinesManagerWebApp.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BusinesManagerWebApp.Pages.Client
 {
+    [Authorize]
     public class CreateClientModel : PageModel
     {
         public IClientsClient _clientsService;

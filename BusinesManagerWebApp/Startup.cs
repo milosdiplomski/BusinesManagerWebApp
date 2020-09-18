@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusinesManagerWebApp.Models;
 using BusinesManagerWebApp.Services;
 using BusinesManagerWebApp.Services.Abstractions;
@@ -31,8 +32,15 @@ namespace BusinesManagerWebApp
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(opt =>
+            {
+                opt.Password.RequiredLength = 7;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+            })
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -68,6 +76,8 @@ namespace BusinesManagerWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
