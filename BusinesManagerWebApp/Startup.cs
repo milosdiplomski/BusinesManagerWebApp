@@ -6,6 +6,7 @@ using AutoMapper;
 using BusinesManagerWebApp.Models;
 using BusinesManagerWebApp.Services;
 using BusinesManagerWebApp.Services.Abstractions;
+using EmailService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,12 +39,21 @@ namespace BusinesManagerWebApp
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireUppercase = false;
             })
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                opt.TokenLifespan = TimeSpan.FromHours(2));
 
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddRazorPages(); 
+            var emailConfig = Configuration
+                             .GetSection("EmailConfiguration")
+                             .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
 
             // services for accessing the web api
             services.AddHttpClient();
